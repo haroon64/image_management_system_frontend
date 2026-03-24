@@ -73,7 +73,7 @@ const UploadImage: FC<UploadImageProps> = ({ onUploadSuccess }) => {
             const formData = new FormData();
             formData.append("image", preview.file);
 
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/upload/`, {
                 method: "POST",
                 body: formData,
             });

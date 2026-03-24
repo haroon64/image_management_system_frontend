@@ -1,16 +1,15 @@
-// Dashboard.jsx
+
 "use client";
 import { useState } from "react";
 import UploadImage from "./sub-components/uploadImage";
 import ImageGrid   from "./sub-components/ImageGrid";
 
 export default function Dashboard() {
-  // Each successful upload bumps this key, telling ImageGrid to re-fetch.
+  
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleUploadSuccess = (newImage:any) => {
-    // newImage is the response body from the API (Django serializer output)
-    console.log("Uploaded:", newImage);
+    
     setRefreshKey((k) => k + 1);
   };
 
@@ -19,10 +18,7 @@ export default function Dashboard() {
       <style>{globalStyles}</style>
 
       <div className="db-root">
-        {/* ── Top bar ──────────────────────────────────────────────────── */}
-   
-
-        {/* ── Page heading ─────────────────────────────────────────────── */}
+       
         <div className="db-page-head">
           <div>
             <p className="db-page-sub">Welcome back</p>
@@ -41,7 +37,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* ── Main layout ──────────────────────────────────────────────── */}
+        
         <div className="db-layout">
           {/* LEFT — Upload panel */}
           <aside className="db-aside">
@@ -54,7 +50,7 @@ export default function Dashboard() {
           </main>
         </div>
 
-        {/* ── Footer ───────────────────────────────────────────────────── */}
+        
         <footer className="db-footer">
           <span>ImageVault &copy; {new Date().getFullYear()}</span>
           <span>Built with Django + React</span>
@@ -64,7 +60,7 @@ export default function Dashboard() {
   );
 }
 
-/* ─── global + layout styles ─────────────────────────────────────────────── */
+
 const globalStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Mono:wght@400;500&display=swap');
 

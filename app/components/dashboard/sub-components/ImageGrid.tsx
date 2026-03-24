@@ -39,7 +39,7 @@ export default function ImageGrid({ refreshKey = 0 }): JSX.Element {
         setTimeout(() => setToast(null), 3000);
     };
 
-    /* ── fetch ── */
+    
     const fetchImages = useCallback(async (): Promise<void> => {
         setLoading(true);
         setFetchError("");
@@ -59,12 +59,12 @@ export default function ImageGrid({ refreshKey = 0 }): JSX.Element {
         fetchImages();
     }, [fetchImages, refreshKey]);
 
-    /* ── delete ── */
+    
     const confirmDelete = async (): Promise<void> => {
         if (!deleteTarget) return;
         setDeleting(true);
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${deleteTarget.id}/`
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/delete/${deleteTarget.id}/`
             , { method: "DELETE" });
             if (!res.ok && res.status !== 204) throw new Error(`Delete failed (${res.status})`);
             setImages((prev) => prev.filter((i) => i.id !== deleteTarget.id));
@@ -77,7 +77,7 @@ export default function ImageGrid({ refreshKey = 0 }): JSX.Element {
         }
     };
 
-    /* ── render helpers ── */
+   
     const renderSkeleton = (): JSX.Element[] =>
         Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="ig-skeleton" style={{ animationDelay: `${i * 80}ms` }} />
@@ -199,7 +199,7 @@ export default function ImageGrid({ refreshKey = 0 }): JSX.Element {
                 </div>
             )}
 
-            {/* Delete confirmation */}
+            
             {deleteTarget && (
                 <div className="ig-modal-bg" onClick={() => !deleting && setDeleteTarget(null)}>
                     <div className="ig-dialog" onClick={(e) => e.stopPropagation()}>
@@ -220,13 +220,13 @@ export default function ImageGrid({ refreshKey = 0 }): JSX.Element {
                 </div>
             )}
 
-            {/* Toast */}
+            
             {toast && <div className={`ig-toast ig-toast-${toast.type}`}>{toast.msg}</div>}
         </>
     );
 }
 
-/* ─── scoped styles ──────────────────────────────────────────────────────── */
+
 const gridStyles = `
     @keyframes ig-spin { to { transform: rotate(360deg); } }
     @keyframes ig-fade-up { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
